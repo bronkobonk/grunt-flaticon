@@ -14,11 +14,17 @@ module.exports = (function () {
     var path = require('path');
     var grunt = require('grunt');
 
+    /**
+     * @param options
+     */
     function flaticon(options) {
         this.options = options;
         this.config = typeof options.config === "string" ? grunt.file.readJSON(options.config) : options.config;
     }
 
+    /**
+     * @param done
+     */
     flaticon.prototype.downloadZip = function downloadZip(done) {
         var data = {data: JSON.stringify(this.config.icons), acc: "font", scode: "4", uId: 0};
 
@@ -33,6 +39,10 @@ module.exports = (function () {
         }.bind(this));
     };
 
+    /**
+     * @param id
+     * @param done
+     */
     flaticon.prototype.handlePackageHash = function handlePackageHash(id, done) {
         grunt.log.write('Fetching archive ' + this.options.url_package + id + '...');
 
@@ -47,17 +57,20 @@ module.exports = (function () {
 
             .on('entry', function (entry) {
                 var ext = path.extname(entry.path);
-            if (entry.type === 'File') {
-                switch (ext) {
-                    case '.woff':case '.svg': case '.ttf': case '.eot':
-                        var fontPath = path.join(this.options.fonts, path.basename(entry.path));
-                        return entry.pipe(fs.createWriteStream(fontPath));
-
-                    case '.css':
-                        if (!this.options.use_package_css) {
-                            var fontPath = path.join(this.options.styles, path.basename(entry.path));
+                if (entry.type === 'File') {
+                    switch (ext) {
+                        case '.woff':
+                        case '.svg':
+                        case '.ttf':
+                        case '.eot':
+                            var fontPath = path.join(this.options.fonts, path.basename(entry.path));
                             return entry.pipe(fs.createWriteStream(fontPath));
-                        }
+
+                        case '.css':
+                            if (!this.options.use_package_css) {
+                                var fontPath = path.join(this.options.styles, path.basename(entry.path));
+                                return entry.pipe(fs.createWriteStream(fontPath));
+                            }
 
                         default:
                             grunt.verbose.writeln('Ignored ', entry.path);
@@ -65,17 +78,22 @@ module.exports = (function () {
                     }
                 }
             }.bind(this))
-        .on('finish', function() {
-            if (!this.options.use_package_css) {
-                this.generateCSS();
-            }
-                
-            grunt.log.ok();
-            done();
-        }.bind(this));
+            .on('finish', function () {
+                if (!this.options.use_package_css) {
+                    var templateContent = this.generateCSS();
+                    var templatePath = path.join(this.options.styles, 'flaticon.css');
+                    grunt.file.write(templatePath, templateContent);
+                }
+
+                grunt.log.ok();
+                done();
+            }.bind(this));
 
     };
 
+    /**
+     * @returns {*|void}
+     */
     flaticon.prototype.generateCSS = function generateCSS() {
         var file = grunt.file.read(__dirname + '/../../templates/flaticon.css');
         var template = grunt.template.process(file, {data: this.config});
