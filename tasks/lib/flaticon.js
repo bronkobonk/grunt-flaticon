@@ -7,13 +7,13 @@
 
 module.exports = (function () {
     'use strict';
-    
+
     var needle = require('needle');
     var unzip = require('unzip');
     var fs = require('fs');
     var path = require('path');
     var grunt = require('grunt');
-    
+
     function flaticon(options) {
         this.options = options;
         this.config = typeof options.config === "string" ? grunt.file.readJSON(options.config) : options.config;
@@ -22,7 +22,7 @@ module.exports = (function () {
     flaticon.prototype.downloadZip = function downloadZip(done) {
         var data = {data: JSON.stringify(this.config.icons), acc: "font", scode: "4", uId: 0};
 
-        needle.post(this.options.url, data, { multipart: true }, function (err, res, body) {
+        needle.post(this.options.url, data, {multipart: true}, function (err, res, body) {
             if (err) {
                 grunt.verbose.writeln('fetching error: ' + err);
                 done();
@@ -45,9 +45,8 @@ module.exports = (function () {
 
         request.pipe(unzip.Parse())
 
-        .on('entry', function (entry) {
-            var ext = path.extname(entry.path);
-
+            .on('entry', function (entry) {
+                var ext = path.extname(entry.path);
             if (entry.type === 'File') {
                 switch (ext) {
                     case '.woff':case '.svg': case '.ttf': case '.eot':
@@ -60,13 +59,12 @@ module.exports = (function () {
                             return entry.pipe(fs.createWriteStream(fontPath));
                         }
 
-                    default:
-                        grunt.verbose.writeln('Ignored ', entry.path);
-                        entry.autodrain();
+                        default:
+                            grunt.verbose.writeln('Ignored ', entry.path);
+                            entry.autodrain();
+                    }
                 }
-            }
-        }.bind(this))
-
+            }.bind(this))
         .on('finish', function() {
             if (!this.options.use_package_css) {
                 this.generateCSS();
@@ -75,15 +73,14 @@ module.exports = (function () {
             grunt.log.ok();
             done();
         }.bind(this));
+
     };
-    
+
     flaticon.prototype.generateCSS = function generateCSS() {
         var file = grunt.file.read(__dirname + '/../../templates/flaticon.css');
-        console.log(typeof file);
-
-        console.log(typeof this.config);
-        grunt.template.process(file, this.config);
+        var template = grunt.template.process(file, {data: this.config});
+        return template;
     };
-    
+
     return flaticon;
 })();

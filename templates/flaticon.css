@@ -9,144 +9,21 @@
     font-style: normal;
 }
 
-[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
-[class^="flaticon-"]:after, [class*=" flaticon-"]:after {
+[class^="<%= css_prefix_text %>"]:before, [class*=" <%= css_prefix_text %>"]:before,
+[class^="<%= css_prefix_text %>"]:after, [class*=" <%= css_prefix_text %>"]:after {
     font-family: Flaticon;
     font-style: normal;
 }
-
-.flaticon-list:before {
-    content: "\e000";
+<%
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
 }
-
-.flaticon-arrow-next:before {
-    content: "\e001";
+%>
+<% var counter = 0; %>
+<% _.each(icons, function(item){ %>
+.<%= css_prefix_text %><%= item.keyword%>:before {
+    content: "\e<%= pad(parseInt(counter++, 16),3) %>";
 }
-
-.flaticon-arrow-prev:before {
-    content: "\e002";
-}
-
-.flaticon-attachment:before {
-    content: "\e003";
-}
-
-.flaticon-bin:before {
-    content: "\e004";
-}
-
-.flaticon-box:before {
-    content: "\e005";
-}
-
-.flaticon-briefcase:before {
-    content: "\e006";
-}
-
-.flaticon-caret:before {
-    content: "\e007";
-}
-
-.flaticon-checked:before {
-    content: "\e008";
-}
-
-.flaticon-close:before {
-    content: "\e009";
-}
-
-.flaticon-chat:before {
-    content: "\e00a";
-}
-
-.flaticon-gear:before {
-    content: "\e00b";
-}
-
-.flaticon-facebook:before {
-    content: "\e00c";
-}
-
-.flaticon-fill:before {
-    content: "\e00d";
-}
-
-.flaticon-google:before {
-    content: "\e00e";
-}
-
-.flaticon-home:before {
-    content: "\e00f";
-}
-
-.flaticon-twitter:before {
-    content: "\e010";
-}
-
-.flaticon-envelope:before {
-    content: "\e011";
-}
-
-.flaticon-linkedin:before {
-    content: "\e012";
-}
-
-.flaticon-logout:before {
-    content: "\e013";
-}
-
-.flaticon-search:before {
-    content: "\e014";
-}
-
-.flaticon-plus-bold:before {
-    content: "\e015";
-}
-
-.flaticon-menu:before {
-    content: "\e016";
-}
-
-.flaticon-minus-filled:before {
-    content: "\e017";
-}
-
-.flaticon-minus:before {
-    content: "\e018";
-}
-
-.flaticon-star:before {
-    content: "\e019";
-}
-
-.flaticon-pencil:before {
-    content: "\e01a";
-}
-
-.flaticon-plus-filled:before {
-    content: "\e01b";
-}
-
-.flaticon-plus:before {
-    content: "\e01c";
-}
-
-.flaticon-arrow-next-bold:before {
-    content: "\e01d";
-}
-
-.flaticon-head:before {
-    content: "\e01e";
-}
-
-.flaticon-people:before {
-    content: "\e01f";
-}
-
-.flaticon-student:before {
-    content: "\e020";
-}
-
-.flaticon-warning:before {
-    content: "\e021";
-}
+<% }); %>
