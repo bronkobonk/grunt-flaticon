@@ -1,16 +1,16 @@
 @font-face {
     font-family: "Flaticon";
-    src: url("../fonts/flaticon.eot");
-    src: url("../fonts/flaticon.eot#iefix") format("embedded-opentype"),
-    url("../fonts/flaticon.woff") format("woff"),
-    url("../fonts/flaticon.ttf") format("truetype"),
-    url("../fonts/flaticon.svg") format("svg");
+    src: url("<%= font_url %>flaticon.eot");
+    src: url("<%= font_url %>flaticon.eot#iefix") format("embedded-opentype"),
+    url("<%= font_url %>flaticon.woff") format("woff"),
+    url("<%= font_url %>flaticon.ttf") format("truetype"),
+    url("<%= font_url %>flaticon.svg") format("svg");
     font-weight: normal;
     font-style: normal;
 }
 
-[class^="<%= css_prefix_text %>"]:before, [class*=" <%= css_prefix_text %>"]:before,
-[class^="<%= css_prefix_text %>"]:after, [class*=" <%= css_prefix_text %>"]:after {
+[class^="<%= config.css_prefix_text %>"]:before, [class*=" <%= config.css_prefix_text %>"]:before,
+[class^="<%= config.css_prefix_text %>"]:after, [class*=" <%= config.css_prefix_text %>"]:after {
     font-family: Flaticon;
     font-style: normal;
 }
@@ -22,8 +22,8 @@ function pad(num, size) {
 }
 %>
 <% var counter = 0; %>
-<% _.each(icons, function(item){ %>
-.<%= css_prefix_text %><%= item.keyword%>:before {
+<% _.each(config.icons, function(item){ %>
+.<%= config.css_prefix_text %><%= item.keyword%>:before {
     content: "\e<%= pad(parseInt(counter++, 16),3) %>";
 }
 <% }); %>

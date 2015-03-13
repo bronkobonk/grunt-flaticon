@@ -28,6 +28,7 @@ module.exports = function (grunt) {
                 config: null,
                 fonts: 'fonts',
                 styles: 'css',
+                font_url: '../fonts/',
                 use_package_css: false
             });
 

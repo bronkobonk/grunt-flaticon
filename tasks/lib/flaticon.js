@@ -96,7 +96,11 @@ module.exports = (function () {
      */
     flaticon.prototype.generateCSS = function generateCSS() {
         var file = grunt.file.read(__dirname + '/../../templates/flaticon.css');
-        var template = grunt.template.process(file, {data: this.config});
+        var data = {
+            config: this.config,
+            font_url: this.options.font_url
+        };
+        var template = grunt.template.process(file, {data: data});
         return template;
     };
 
