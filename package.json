@@ -14,5 +14,9 @@
   "bugs": {
     "url": "https://github.com/bronkobonk/grunt-flaticon/issues"
   },
-  "homepage": "https://github.com/bronkobonk/grunt-flaticon"
+  "homepage": "https://github.com/bronkobonk/grunt-flaticon",
+  "dependencies": {
+    "needle": "^0.8.2",
+    "request": "^2.53.0"
+  }
 }

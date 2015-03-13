@@ -7,6 +7,8 @@
 
 module.exports = function (grunt) {
 	'use strict';
+
+    var needle = require('needle');
     
 	grunt.registerMultiTask(
 		'flaticon', 'Grunt task to automatically download flaticon icons collection from config stored in JSON file',
@@ -14,16 +16,36 @@ module.exports = function (grunt) {
 		function flaticon() {
 			var self = this;
 			var files = this.files;
+            var done = this.async();
 
 			var options = this.options({
-                packageRequest: 'http://htm.flaticon.com/request/download.php',
-                downloadUrl: 'http://www.flaticon.com/download/?t=524cf755f1fd6f30e8858a171b86b819&n=My%20Icons',
+                url: 'http://html.flaticon.com/request/download.php',
                 config: null,
                 fonts: 'fonts',
                 styles: 'css'
 			});
 
-			var configJson = null;
+			var configJson = grunt.file.readJSON(options.config);
+            var flaticonResponse = null;
+            
+            console.log(JSON.stringify(configJson.icons));
+
+            var data = {data: JSON.stringify(configJson.icons), acc: "font", scode: "4", uId: 0};
+
+            console.log(options.url);
+            needle.post(options.url, data, { multipart: true }, function (err, res, body) {
+                console.log(body);
+                if (err) {
+                    grunt.log.error();
+                    callback(err);
+                } else {
+                    grunt.log.ok();
+                    grunt.log.debug('sid: ' + body);
+                    callback(null, options, body);
+                }
+                
+                done();
+            });
 		}
 	);
 };

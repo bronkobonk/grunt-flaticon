@@ -1,40 +1,38 @@
 {
-	"name": "",
-	"css_prefix_text": "flaticon-",
-	"css_use_suffix": false,
-	"hinting": true,
-	"copyright": "undefined",
-	"fullname": "undefined",
-	"icons": [
-		{
-			"i59965": {
-				"id": "59965",
-				"keyword": "email103"
-			},
-			"i32178": {
-				"id": "32178",
-				"keyword": "delete30"
-			},
-			"i60381": {
-				"id": "60381",
-				"keyword": "new100"
-			},
-			"i64498": {
-				"id": "64498",
-				"keyword": "cross106"
-			},
-			"i46951": {
-				"id": "46951",
-				"keyword": "new48"
-			},
-			"i61155": {
-				"id": "61155",
-				"keyword": "close47"
-			},
-			"i63568": {
-				"id": "63568",
-				"keyword": "eye110"
-			}
-		}
-	]
+    "name": "",
+    "css_prefix_text": "flaticon-",
+    "css_use_suffix": false,
+    "hinting": true,
+    "copyright": "undefined",
+    "fullname": "undefined",
+    "icons": {
+        "i59965": {
+            "id": "59965",
+            "keyword": "email103"
+        },
+        "i32178": {
+            "id": "32178",
+            "keyword": "delete30"
+        },
+        "i60381": {
+            "id": "60381",
+            "keyword": "new100"
+        },
+        "i64498": {
+            "id": "64498",
+            "keyword": "cross106"
+        },
+        "i46951": {
+            "id": "46951",
+            "keyword": "new48"
+        },
+        "i61155": {
+            "id": "61155",
+            "keyword": "close47"
+        },
+        "i63568": {
+            "id": "63568",
+            "keyword": "eye110"
+        }
+    }
 }
