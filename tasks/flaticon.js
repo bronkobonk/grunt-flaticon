@@ -16,7 +16,8 @@ module.exports = function (grunt) {
 			var files = this.files;
 
 			var options = this.options({
-                host: 'http://fontello.com',
+                packageRequest: 'http://htm.flaticon.com/request/download.php',
+                downloadUrl: 'http://www.flaticon.com/download/?t=524cf755f1fd6f30e8858a171b86b819&n=My%20Icons',
                 config: null,
                 fonts: 'fonts',
                 styles: 'css'
