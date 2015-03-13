@@ -51,12 +51,14 @@ module.exports = (function () {
             if (entry.type === 'File') {
                 switch (ext) {
                     case '.woff':case '.svg': case '.ttf': case '.eot':
-                    var fontPath = path.join(this.options.fonts, path.basename(entry.path));
-                    return entry.pipe(fs.createWriteStream(fontPath));
+                        var fontPath = path.join(this.options.fonts, path.basename(entry.path));
+                        return entry.pipe(fs.createWriteStream(fontPath));
 
                     case '.css':
-                        var fontPath = path.join(this.options.styles, path.basename(entry.path));
-                        return entry.pipe(fs.createWriteStream(fontPath));
+                        if (!this.options.use_package_css) {
+                            var fontPath = path.join(this.options.styles, path.basename(entry.path));
+                            return entry.pipe(fs.createWriteStream(fontPath));
+                        }
 
                     default:
                         grunt.verbose.writeln('Ignored ', entry.path);
@@ -66,7 +68,10 @@ module.exports = (function () {
         }.bind(this))
 
         .on('finish', function() {
-            this.generateCSS();
+            if (!this.options.use_package_css) {
+                this.generateCSS();
+            }
+                
             grunt.log.ok();
             done();
         }.bind(this));

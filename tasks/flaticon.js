@@ -27,7 +27,8 @@ module.exports = function (grunt) {
                 url_package: 'http://www.flaticon.com/download/?t=',
                 config: null,
                 fonts: 'fonts',
-                styles: 'css'
+                styles: 'css',
+                use_package_css: false
             });
 
             var fl = new flaticon(options);
