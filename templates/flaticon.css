@@ -14,16 +14,8 @@
     font-family: Flaticon;
     font-style: normal;
 }
-<%
-function pad(num, size) {
-    var s = num+"";
-    while (s.length < size) s = "0" + s;
-    return s;
-}
-%>
-<% var counter = 0; %>
-<% _.each(config.icons, function(item){ %>
-.<%= config.css_prefix_text %><%= item.keyword%>:before {
-    content: "\e<%= pad(parseInt(counter++, 16),3) %>";
+<% _.each(icons, function(item){ %>
+.<%= config.css_prefix_text %><%= item.name%>:before {
+    content: "<%= item.content %>";
 }
 <% }); %>

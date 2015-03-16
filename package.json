@@ -1,6 +1,6 @@
 {
   "name": "grunt-flaticon",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Grunt task to automatically download flaticon icons collection from config stored in JSON file",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
