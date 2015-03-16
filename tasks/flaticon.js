@@ -29,7 +29,8 @@ module.exports = function (grunt) {
                 fonts: 'fonts',
                 styles: 'css',
                 font_url: '../fonts/',
-                use_package_css: false
+                use_package_css: false,
+                cache_dir: null
             });
 
             var fl = new flaticon(options);

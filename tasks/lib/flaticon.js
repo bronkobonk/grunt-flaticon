@@ -13,6 +13,7 @@ module.exports = (function () {
     var fs = require('fs');
     var path = require('path');
     var grunt = require('grunt');
+    var crypto = require('crypto');
 
     /**
      * @param options
@@ -20,6 +21,7 @@ module.exports = (function () {
     function flaticon(options) {
         this.options = options;
         this.config = typeof options.config === "string" ? grunt.file.readJSON(options.config) : options.config;
+        this.hash = "";
     }
 
     /**
@@ -27,6 +29,20 @@ module.exports = (function () {
      */
     flaticon.prototype.downloadZip = function downloadZip(done) {
         var data = {data: JSON.stringify(this.config.icons), acc: "font", scode: "4", uId: 0};
+
+        var md5sum = crypto.createHash('md5');
+        md5sum.update(JSON.stringify(this.config));
+        this.hash = md5sum.digest('hex');
+
+        if (this.options.cache_dir !== null) {
+            var cacheFile = path.join(this.options.cache_dir, 'flaticon' + this.hash + '.zip');
+            
+            if (fs.existsSync(cacheFile)) {
+                var request = fs.createReadStream(cacheFile);
+                this.processRequest(request.pipe(unzip.Parse()), done);
+                return;
+            }
+        }
 
         needle.post(this.options.url, data, {multipart: true}, function (err, res, body) {
             if (err) {
@@ -46,15 +62,27 @@ module.exports = (function () {
     flaticon.prototype.handlePackageHash = function handlePackageHash(id, done) {
         grunt.log.write('Fetching archive ' + this.options.url_package + id + '...');
 
-        var request = needle.get(this.options.url_package + id, function (err, res, body) {
+        var needleOptions = {};
+        
+        if (this.options.cache_dir !== null) {
+            needleOptions.output = path.join(this.options.cache_dir, 'flaticon' + this.hash + '.zip');
+        }
+        
+        var request = needle.get(this.options.url_package + id, needleOptions, function (err, res, body) {
             if (err) {
                 done();
                 grunt.log.err();
             }
         });
 
-        request.pipe(unzip.Parse())
+        this.processRequest(request.pipe(unzip.Parse()), done);
+    };
 
+    /**
+     * @returns {*|void}
+     */
+    flaticon.prototype.processRequest = function processRequest(request, done) {
+        request
             .on('entry', function (entry) {
                 var ext = path.extname(entry.path);
                 if (entry.type === 'File') {
@@ -76,17 +104,18 @@ module.exports = (function () {
                     }
                 }
             }.bind(this))
-            .on('finish', function () {
+
+            .on('close', function () {
                 if (!this.options.use_package_css) {
                     var templateContent = this.generateCSS();
                     var templatePath = path.join(this.options.styles, 'flaticon.css');
                     grunt.file.write(templatePath, templateContent);
                 }
-
+                
                 grunt.log.ok();
                 done();
-            }.bind(this));
-
+            }.bind(this))
+        ;
     };
 
     /**
