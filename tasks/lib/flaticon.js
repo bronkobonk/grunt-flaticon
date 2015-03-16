@@ -96,10 +96,14 @@ module.exports = (function () {
      */
     flaticon.prototype.generateCSS = function generateCSS() {
         var file = grunt.file.read(__dirname + '/../../templates/flaticon.css');
+        var config = this.config;
+        config.icons = grunt.util._.sortBy(grunt.util._.toArray(config.icons), 'keyword');
+        
         var data = {
-            config: this.config,
+            config: config,
             font_url: this.options.font_url
         };
+        
         var template = grunt.template.process(file, {data: data});
         return template;
     };
