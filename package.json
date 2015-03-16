@@ -18,7 +18,6 @@
   "dependencies": {
     "grunt": "^0.4.5",
     "needle": "^0.8.2",
-    "request": "^2.53.0",
     "unzip": "^0.1.11"
   }
 }
