@@ -30,6 +30,7 @@ module.exports = function (grunt) {
                 styles: 'css',
                 font_url: '../fonts/',
                 use_package_css: false,
+                use_less: false,
                 cache_dir: null
             });
 

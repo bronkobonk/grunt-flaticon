@@ -95,8 +95,8 @@ module.exports = (function () {
                             return entry.pipe(fs.createWriteStream(fontPath));
 
                         case '.css':
-                            var fontPath = path.join(this.options.styles, path.basename(entry.path));
-                            return entry.pipe(fs.createWriteStream(fontPath));
+                            var cssPath = this.options.styles;
+                            return entry.pipe(fs.createWriteStream(cssPath));
 
                         default:
                             grunt.verbose.writeln('Ignored ', entry.path);
@@ -108,7 +108,7 @@ module.exports = (function () {
             .on('close', function () {
                 if (!this.options.use_package_css) {
                     var templateContent = this.generateCSS();
-                    var templatePath = path.join(this.options.styles, 'flaticon.css');
+                    var templatePath = this.options.styles;
                     grunt.file.write(templatePath, templateContent);
                 }
                 
@@ -122,7 +122,7 @@ module.exports = (function () {
      * @returns {*|void}
      */
     flaticon.prototype.generateCSS = function generateCSS() {
-        var cssPath = path.join(this.options.styles, 'flaticon.css');
+        var cssPath = this.options.styles;
         var currentContent = grunt.file.read(cssPath);
         
         var icons = [];
@@ -140,7 +140,8 @@ module.exports = (function () {
             font_url: this.options.font_url
         };
 
-        var templateFile = grunt.file.read(__dirname + '/../../templates/flaticon.css');
+        var ext = this.options.use_less ? 'less' : 'css';
+        var templateFile = grunt.file.read(__dirname + '/../../templates/flaticon.' + ext);
         var template = grunt.template.process(templateFile, {data: data});
         return template;
     };
