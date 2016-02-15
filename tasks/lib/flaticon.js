@@ -28,8 +28,6 @@ module.exports = (function () {
      * @param done
      */
     flaticon.prototype.downloadZip = function downloadZip(done) {
-        var data = {data: JSON.stringify(this.config.icons), acc: "font", scode: "4", uId: 0};
-
         var md5sum = crypto.createHash('md5');
         md5sum.update(JSON.stringify(this.config));
         this.hash = md5sum.digest('hex');
@@ -44,31 +42,25 @@ module.exports = (function () {
             }
         }
 
-        needle.post(this.options.url, data, {multipart: true}, function (err, res, body) {
-            if (err) {
-                grunt.verbose.writeln('fetching error: ' + err);
-                done();
-            } else {
-                grunt.verbose.writeln('sid: ' + body);
-                this.handlePackageHash(body, done);
-            }
-        }.bind(this));
+        this.handlePackageHash(done);
     };
 
     /**
      * @param id
      * @param done
      */
-    flaticon.prototype.handlePackageHash = function handlePackageHash(id, done) {
-        grunt.log.write('Fetching archive ' + this.options.url_package + id + '...');
+    flaticon.prototype.handlePackageHash = function handlePackage(done) {
+        grunt.log.write('Fetching archive ' + this.options.url_package + '...');
 
-        var needleOptions = {};
+        var needleOptions = {multipart: true};
         
         if (this.options.cache_dir !== null) {
             needleOptions.output = path.join(this.options.cache_dir, 'flaticon' + this.hash + '.zip');
         }
-        
-        var request = needle.get(this.options.url_package + id, needleOptions, function (err, res, body) {
+
+        var data = {downC_icons: JSON.stringify(this.config.icons), downC_format: "iconfont", scode: "4", downC_user_id: 0};
+
+        var request = needle.post(this.options.url_package, data, needleOptions, function (err, res, body) {
             if (err) {
                 done();
                 grunt.log.err();

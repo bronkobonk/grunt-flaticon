@@ -23,8 +23,7 @@ module.exports = function (grunt) {
             var done = this.async();
 
             var options = this.options({
-                url: 'http://html.flaticon.com/request/download.php',
-                url_package: 'http://www.flaticon.com/download/?t=',
+                url_package: 'http://www.flaticon.com/download-collection',
                 config: null,
                 fonts: 'fonts',
                 styles: 'css',
