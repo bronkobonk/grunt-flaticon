@@ -1,10 +1,10 @@
 @font-face {
     font-family: "Flaticon";
-    src: url("<%= font_url %>flaticon.eot");
-    src: url("<%= font_url %>flaticon.eot#iefix") format("embedded-opentype"),
-    url("<%= font_url %>flaticon.woff") format("woff"),
-    url("<%= font_url %>flaticon.ttf") format("truetype"),
-    url("<%= font_url %>flaticon.svg") format("svg");
+    src: url("<%= font_url %>Flaticon.eot");
+    src: url("<%= font_url %>Flaticon.eot#iefix") format("embedded-opentype"),
+    url("<%= font_url %>Flaticon.woff") format("woff"),
+    url("<%= font_url %>Flaticon.ttf") format("truetype"),
+    url("<%= font_url %>Flaticon.svg") format("svg");
     font-weight: normal;
     font-style: normal;
 }
