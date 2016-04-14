@@ -36,17 +36,17 @@ Example flaticon.json
 	{
 		"css_prefix_text": "flaticon-",
 		"icons": {
-			"i1981": {
-				"id": "1981",
-				"keyword": "close"
-			},
-			"i2470": {
-				"id": "2470",
-				"keyword": "twitter"
-			},
-			"i3526": {
-				"id": "3526",
-				"keyword": "minus-filled"
-			}
+		        {
+		            "id": "128",
+		            "team": 1,
+		            "color": "#000000",
+		            "name": "gear"
+		        },
+		        {
+		            "id": "1981",
+		            "team": 1,
+		            "color": "#000000",
+		            "name": "close"
+		        }
 		}
 	}
