@@ -34,7 +34,7 @@ module.exports = (function () {
 
         if (this.options.cache_dir !== null) {
             var cacheFile = path.join(this.options.cache_dir, 'flaticon' + this.hash + '.zip');
-            
+
             if (fs.existsSync(cacheFile)) {
                 var request = fs.createReadStream(cacheFile);
                 this.processRequest(request.pipe(unzip.Parse()), done);
@@ -53,12 +53,17 @@ module.exports = (function () {
         grunt.log.write('Fetching archive ' + this.options.url_package + '...');
 
         var needleOptions = {multipart: true};
-        
+
         if (this.options.cache_dir !== null) {
             needleOptions.output = path.join(this.options.cache_dir, 'flaticon' + this.hash + '.zip');
         }
 
-        var data = {downC_icons: JSON.stringify(this.config.icons), downC_format: "iconfont", scode: "4", downC_user_id: 0};
+        var data = {
+            downC_icons: JSON.stringify(this.config.icons),
+            downC_format: "iconfont",
+            scode: "4",
+            downC_user_id: 0
+        };
 
         var request = needle.post(this.options.url_package, data, needleOptions, function (err, res, body) {
             if (err) {
@@ -103,7 +108,7 @@ module.exports = (function () {
                     var templatePath = this.options.styles;
                     grunt.file.write(templatePath, templateContent);
                 }
-                
+
                 grunt.log.ok();
                 done();
             }.bind(this))
@@ -116,23 +121,26 @@ module.exports = (function () {
     flaticon.prototype.generateCSS = function generateCSS() {
         var cssPath = this.options.styles;
         var currentContent = grunt.file.read(cssPath);
-        
+
         var icons = [];
-        
+
         currentContent.replace(/\.flaticon-(.*?):before {(?:[\s\S]*?)content: "(.*)"/g, function (m, name, content) {
             icons.push({
                 name: name,
                 content: content
             });
         });
-        
+
         var data = {
             config: this.config,
             icons: icons,
             font_url: this.options.font_url
         };
-
-        var ext = this.options.use_less ? 'less' : 'css';
+        var allowedExtensions = ['css', 'less', 'scss'];
+        if (-1 === allowedExtensions.indexOf(this.options.template)) {
+            throw 'Extension "' + this.options.template + '" is not recognized.';
+        }
+        var ext = this.options.template;
         var templateFile = grunt.file.read(__dirname + '/../../templates/flaticon.' + ext);
         var template = grunt.template.process(templateFile, {data: data});
         return template;
