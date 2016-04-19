@@ -26,7 +26,7 @@ Example configuration
 				fonts: 'web/fonts/',
 				styles: 'web/css/flaticon.less',
 				cache_dir: 'app/cache/',
-				use_less: true
+				template: 'css' // 'css', 'less' and 'scss' possible
 			}
 		}
 	}
