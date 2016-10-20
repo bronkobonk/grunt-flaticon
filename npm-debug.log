@@ -1,0 +1,104 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'publish' ]
+2 info using npm@3.8.9
+3 info using node@v6.2.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/var/www',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /home/gowork/.npm/grunt-flaticon/0.3.0/package.tgz not in flight; packing
+9 verbose correctMkdir /home/gowork/.npm correctMkdir not in flight; initializing
+10 info lifecycle grunt-flaticon@0.3.0~prepublish: grunt-flaticon@0.3.0
+11 silly lifecycle grunt-flaticon@0.3.0~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/home/gowork/.npm/grunt-flaticon/0.3.0/package.tgz',
+12 verbose tar pack   '/var/www' ]
+13 verbose tarball /home/gowork/.npm/grunt-flaticon/0.3.0/package.tgz
+14 verbose folder /var/www
+15 verbose addLocalTarball adding from inside cache /home/gowork/.npm/grunt-flaticon/0.3.0/package.tgz
+16 verbose correctMkdir /home/gowork/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd grunt-flaticon@0.3.0
+18 verbose afterAdd /home/gowork/.npm/grunt-flaticon/0.3.0/package/package.json not in flight; writing
+19 verbose correctMkdir /home/gowork/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /home/gowork/.npm/grunt-flaticon/0.3.0/package/package.json written
+21 silly publish { name: 'grunt-flaticon',
+21 silly publish   version: '0.3.0',
+21 silly publish   description: 'Grunt task to automatically download flaticon icons collection from config stored in JSON file',
+21 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/bronkobonk/grunt-flaticon.git' },
+21 silly publish   author: '',
+21 silly publish   license: 'MIT',
+21 silly publish   bugs: { url: 'https://github.com/bronkobonk/grunt-flaticon/issues' },
+21 silly publish   homepage: 'https://github.com/bronkobonk/grunt-flaticon',
+21 silly publish   dependencies: { grunt: '^0.4.5', needle: '^0.8.2', unzip: '^0.1.11' },
+21 silly publish   readme: '# grunt-flaticon\n\nGrunt task to automatically download flaticon icons collection from config stored in JSON file\n\n## Getting Started\nThis plugin requires Grunt.\n\nIf you haven\'t used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you\'re familiar with that process, you may install this plugin with this command:\n\n## Options\n\n- config - path to flaticon.json configuration file\n- fonts - path to directory where fonts will be downloaded\n- styles - css or less file where icons classes will be stored\n- cache_dir - directory for caching zip\n- use_less - disable or enable generating style in less\n\n## Example\n\nExample configuration\n\n\tflaticon: {\n\t\tdist: {\n\t\t\toptions: {\n\t\t\t\tconfig: \'flaticon.json\',\n\t\t\t\tfonts: \'web/fonts/\',\n\t\t\t\tstyles: \'web/css/flaticon.less\',\n\t\t\t\tcache_dir: \'app/cache/\',\n\t\t\t\tuse_less: true\n\t\t\t}\n\t\t}\n\t}\n\nExample flaticon.json\n\n\t{\n\t\t"css_prefix_text": "flaticon-",\n\t\t"icons": {\n\t\t        {\n\t\t            "id": "128",\n\t\t            "team": 1,\n\t\t            "color": "#000000",\n\t\t            "name": "gear"\n\t\t        },\n\t\t        {\n\t\t            "id": "1981",\n\t\t            "team": 1,\n\t\t            "color": "#000000",\n\t\t            "name": "close"\n\t\t        }\n\t\t}\n\t}\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: 'b015d65b787d4e7be4d4a523480aa3e0c5b6aa97',
+21 silly publish   _id: 'grunt-flaticon@0.3.0',
+21 silly publish   _shasum: '02def31653f7c8bc3380a5ae1867d277641f27cf',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name grunt-flaticon
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'grunt-flaticon',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   name: 'grunt-flaticon',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/grunt-flaticon
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /home/gowork/.npm/grunt-flaticon/0.3.0/package.tgz
+30 verbose request uri https://registry.npmjs.org/grunt-flaticon
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 12:50:00 PM
+33 verbose request using bearer token for auth
+34 verbose request id d2bf0129a18eceed
+35 http request PUT https://registry.npmjs.org/grunt-flaticon
+36 http 403 https://registry.npmjs.org/grunt-flaticon
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '95',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Thu, 20 Oct 2016 12:50:01 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-lhr6338-LHR',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1476967800.532817,VS0,VE855',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating /home/gowork/.npm/registry.npmjs.org/grunt-flaticon on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: "You cannot publish over the previously published version 0.3.0." : grunt-flaticon
+40 verbose stack     at makeError (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+40 verbose stack     at Request._callback (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+40 verbose stack     at Request.self.callback (/usr/lib/node_modules/npm/node_modules/request/request.js:200:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+40 verbose stack     at emitOne (events.js:101:20)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:988:12)
+41 verbose statusCode 403
+42 verbose pkgid grunt-flaticon
+43 verbose cwd /var/www
+44 error Linux 4.2.0-42-generic
+45 error argv "/usr/bin/nodejs" "/usr/bin/npm" "publish"
+46 error node v6.2.0
+47 error npm  v3.8.9
+48 error code E403
+49 error "You cannot publish over the previously published version 0.3.0." : grunt-flaticon
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
